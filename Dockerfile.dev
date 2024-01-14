@@ -1,0 +1,13 @@
+# this file is only used if you want to run your application on dev enviroment
+FROM node:16-alpine
+
+WORKDIR '/app'
+
+# the . means copy the package.json file to the current work dir whcih is /app
+COPY package.json . 
+RUN npm install
+
+# copy every thing from our project dir [public, src,... folders to work dir /app]
+COPY . .
+
+CMD ["npm", "run", "start"]
