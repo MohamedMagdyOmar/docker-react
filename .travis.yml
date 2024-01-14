@@ -5,5 +5,5 @@ services:
 before_install: # all steps required before running our test on travis
   - docker build -t 361458/docker-react -f Dockerfile.dev . # before run my test, build docker dev
 
-script: # all commands need to be excuted to run our test suite
+script: # all commands need to be excuted to run our test suite 
   - docker run -e CI=true 361458/docker-react npm run test
