@@ -1,0 +1,26 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    # if use write only "." as previosuly, and then you run docker-compose up it will not find the docker file 
+    # because the docker file name is not Dockerfile, but its name is Dockerfile.dev
+    # that is why replace the . with above
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules
+      - .:/app # this command means map the current directory "." into app folder in the container
+  
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      # note that there is no ports because tests are not using ports
+    volumes:
+      - /app/node_modules
+      - .:/app # this command means map the current directory "." into app folder in the container
+
+    # override start command
+    command: ["npm", "run", "test"]

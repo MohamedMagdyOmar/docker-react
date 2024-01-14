@@ -7,3 +7,16 @@ before_install: # all steps required before running our test on travis
 
 script: # all commands need to be excuted to run our test suite 
   - docker run -e CI=true 361458/docker-react npm run test
+
+
+deploy: # how to take your application and deploy it to aws
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "frontend"
+  env: "Frontend-env"
+  bucket_name: "elasticbeanstalk-us-east-2-837322377510"
+  bucket_path: "frontend"
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: "$AWS_SECRET_KEY"
